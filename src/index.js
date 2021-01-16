@@ -22,7 +22,7 @@ ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>
       <BrowserRouter>
-        <Switch>    
+        <Switch>
           <Route exact path="/events/new" component={EventsNew} />
           <Route exact path="/" component={EventsIndex} />
         </Switch>
