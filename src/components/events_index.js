@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import _ from 'lodash'
+import { Link } from "react-router-dom";
 
-import { increment, decrement } from '../actions'
+import { readEvents } from '../actions'
 
 class EventsIndex extends Component {
   componentDidMount() {
@@ -9,20 +11,49 @@ class EventsIndex extends Component {
     this.props.readEvents()
   }
 
-  render() {
-    const props = this.props
+  renderEvents() {
+    return _.map(this.props.events, event => (
+      <tr key={event.id}>
+        <td>{event.id}</td>
+        <td>{event.titile}</td>
+        <td>{event.body}</td>
+      </tr>
 
+
+    ))
+  }
+
+  render() {
     return (
       <React.Fragment>
-        <div>value: { props.value }</div>
-        <button onClick={props.increment}+1</button>
-        <button onClick={props.decrement}-1</button>
-      </React.Fragment>
+      <FloatingActionButton style={style} containerElement={<Link to="/events/new" />}>
+        <ContentAdd />
+      </FloatingActionButton>
+
+      <Table>
+        <TableHeader
+          displaySelectAll={false}
+          adjustForCheckbox={false}
+        >
+          <TableRow>
+            <TableHeaderColumn>ID</TableHeaderColumn>
+            <TableHeaderColumn>Title</TableHeaderColumn>
+            <TableHeaderColumn>Body</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody displayRowCheckbox={false}>
+          {this.renderEvents()}
+        </TableBody>
+      </Table>
+      <Link to="/events/new">New Event</Link>
+    </React.Fragment>
+
     )
   }
 }
 
-const mapStateToProps = state => ({ value: state.count.value })
+const mapStateToProps = state => ({})
 
 const mapDispatchToProps = ({ readEvents })
 
