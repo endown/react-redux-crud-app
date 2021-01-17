@@ -17,7 +17,6 @@ import { readEvents } from '../actions'
 
 class EventsIndex extends Component {
   componentDidMount() {
-    console.log("hi")
     this.props.readEvents()
   }
 
@@ -27,7 +26,7 @@ class EventsIndex extends Component {
         <TableRowColumn>{event.id}</TableRowColumn>
         <TableRowColumn>
           <Link to={'/events/${event.id}'}>
-            {event.titile}
+            {event.title}
           </Link>
         </TableRowColumn>
         <TableRowColumn>{event.body}</TableRowColumn>
@@ -41,11 +40,12 @@ class EventsIndex extends Component {
       right: 12,
       bottom: 12
     }
+
     return (
       <React.Fragment>
-      <FloatingActionButton style={style} containerElement={<Link to="/events/new" />}>
-        <ContentAdd />
-      </FloatingActionButton>
+        <FloatingActionButton style={style} containerElement={<Link to="/events/new" />}>
+          <ContentAdd />
+        </FloatingActionButton>
 
       <Table>
         <TableHeader
@@ -63,14 +63,12 @@ class EventsIndex extends Component {
           {this.renderEvents()}
         </TableBody>
       </Table>
-      <Link to="/events/new">New Event</Link>
     </React.Fragment>
-
     )
   }
 }
 
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({ events: state.events })
 
 const mapDispatchToProps = ({ readEvents })
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Field, reduxFrom} from 'redux-form'
-import { Link } from "react-router-dom"
+import { Field, reduxForm } from 'redux-form'
+import { Link } from 'react-router-dom'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
@@ -11,19 +11,21 @@ class EventsShow extends Component {
   constructor(props) {
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
-    this.onDeleteClick = this.onDeleteClick(this)
+    this.onDeleteClick = this.onDeleteClick.bind(this)
   }
+  
   componentDidMount() {
     const { id } = this.props.match.params
     if (id) this.props.getEvent(id)
   }
+  
   renderField(field) {
-    const {input, label, type, meta: { touched, error } } = field
+    const { input, label, type, meta: { touched, error } } = field
 
     return (
       <TextField
-      hintText={lavel}
-      floatingLabelFixed={label}  
+      hintText={label}
+      floatingLabelText={label}  
       type={type}
       errorText={touched && error}
       {...input}
@@ -78,5 +80,5 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = ({ deleteEvent, getEvent, putEvent })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  reduxFrom({ validate, form: 'eventShowForm', enableReinitialize: true })(EventsShow)
+  reduxForm({ validate, form: 'eventShowForm', enableReinitialize: true })(EventsShow)
   )

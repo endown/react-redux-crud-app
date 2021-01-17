@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Field, reduxFrom} from 'redux-form'
+import { Field, reduxForm} from 'redux-form'
 import { Link } from "react-router-dom";
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
@@ -17,14 +17,14 @@ class EventsNew extends Component {
     const {input, label, type, meta: { touched, error } } = field
 
     return (
-    <TextField
-      hintText={lavel}
-      floatingLabelFixed={label}  
-      type={type}
-      errorText={touched && error}
-      {...input}
-      fullWidth={true}
-    />
+      <TextField
+        hintText={label}
+        floatingLabelFixed={label}  
+        type={type}
+        errorText={touched && error}
+        {...input}
+        fullWidth={true}
+      />
     )
   }
 
@@ -40,6 +40,7 @@ class EventsNew extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <div><Field label="Title" name="title" type="text" component={this.renderField} /></div>
+        <div><Field label="Body" name="body" type="text" component={this.renderField} /></div>
         <RaisedButton label="Submit" type="submit" style={style} disabled={pristine || submitting || invalid } />
         <RaisedButton label="Cancel" style={style} containerElement={<Link to="/" />}/>
       </form>
@@ -54,8 +55,9 @@ const validate = values => {
 
   return errors
 }
+
 const mapDispatchToProps = ({ postEvent })
 
 export default connect(null, mapDispatchToProps)(
-  reduxFrom({ validate, form: 'eventNewForm' })(EventsNew)
+  reduxForm({ validate, form: 'eventNewForm' })(EventsNew)
   )
