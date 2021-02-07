@@ -47,23 +47,23 @@ class EventsIndex extends Component {
           <ContentAdd />
         </FloatingActionButton>
 
-      <Table>
-        <TableHeader
-          displaySelectAll={false}
-          adjustForCheckbox={false}
-        >
-          <TableRow>
-            <TableHeaderColumn>ID</TableHeaderColumn>
-            <TableHeaderColumn>Title</TableHeaderColumn>
-            <TableHeaderColumn>Body</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
+        <Table>
+          <TableHeader
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+          >
+            <TableRow>
+              <TableHeaderColumn>ID</TableHeaderColumn>
+              <TableHeaderColumn>Title</TableHeaderColumn>
+              <TableHeaderColumn>Body</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
 
-        <TableBody displayRowCheckbox={false}>
-          {this.renderEvents()}
-        </TableBody>
-      </Table>
-    </React.Fragment>
+          <TableBody displayRowCheckbox={false}>
+            {this.renderEvents()}
+          </TableBody>
+        </Table>
+      </React.Fragment>
     )
   }
 }
